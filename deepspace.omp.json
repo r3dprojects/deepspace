@@ -9,7 +9,9 @@
     "root-fg": "#07d100",
     "root-bg": "#1a1b26",
     "info-fg": "#f7768e",
-    "info-bg": "#4a4c70"
+    "info-bg": "#4a4c70",
+    "git-fg": "#7dcfff",
+    "git-bg": "#3b3d57"
   },
   "blocks": [
     {
@@ -29,10 +31,10 @@
         {
           "type": "os",
           "style": "powerline",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "foreground": "p:os-fg",
           "background": "p:os-bg",
-          "template": "{{ if .Root }}<p:root-fg><b>{{ .UserName}}@{{ .HostName }} </b></p:root-fg>{{ else }}<p:os-fg>{{ .UserName }}@{{ .HostName }}</p:os-fg>{{ end }}",
+          "template": "{{ if .Root }}<p:root-fg><b>{{ .UserName}}@{{ .HostName }} </b></p:root-fg>{{ else }}<p:os-fg>{{ .UserName }}@{{ .HostName }} </p:os-fg>{{ end }}",
           "properties": {
             "cache_duration": "none"
           }
@@ -69,6 +71,7 @@
           "foreground": "#7dcfff",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
+          "trailing_powerline_symbol": "\ue0b0 ",
           "properties": {
             "branch_template": "{{ trunc 25 .Branch }}",
             "fetch_stash_count": true,
