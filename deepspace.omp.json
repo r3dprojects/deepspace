@@ -10,11 +10,14 @@
     "root-bg": "#1a1b26",
     "info-fg": "#f7768e",
     "info-bg": "#4a4c70",
+    "info-warn": "#c4fbff",
     "git-fg": "#7dcfff",
     "git-bg": "#3b3d57",
     "git-ahead": "#B388FF",
     "git-behind": "#B388FF",
-    "git-changed": "#bb9af7"
+    "git-changed": "#bb9af7",
+    "code-green": "#95f5a3",
+    "code-red": "#ee3003"
   },
   "blocks": [
     {
@@ -24,6 +27,7 @@
         {
           "type": "os",
           "style": "plain",
+
           "foreground": "p:os-fg",
           "background": "p:os-bg",
           "foreground_templates": [
@@ -39,6 +43,7 @@
           "type": "os",
           "style": "plain",
           "powerline_symbol": "\ue0b0",
+
           "foreground": "p:os-fg",
           "background": "p:os-bg",
           "foreground_templates": [
@@ -46,25 +51,34 @@
           ],
           "background_templates ": ["p:path-bg"],
           "template": "{{ if .Root }}<b>{{ .UserName}}@{{ .HostName }}</b>{{ else }}{{ .UserName }}@{{ .HostName }}{{ end }} ",
+
           "properties": {
             "cache_duration": "none"
           }
         },
         {
+          "type": "path",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+
           "foreground": "p:path-fg",
           "background": "p:path-bg",
           "foreground_templates": ["p:path-fg"],
           "background_templates ": ["p:path-bg"],
-          "type": "path",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
           "template": " \uf07c  {{ .Path }} ",
+
           "properties": {
             "cache_duration": "none",
             "style": "full"
           }
         },
         {
+          "type": "git",
+          "trailing_diamond": "\ue0b4",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "trailing_powerline_symbol": "\ue0b0 ",
+
           "foreground": "p:git-fg",
           "background": "p:git-bg",
           "background_templates": [
@@ -79,29 +93,47 @@
             "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
             "{{ if gt .Behind 0 }}p:git-ahead{{ end }}"
           ],
-          "type": "git",
-          "trailing_diamond": "\ue0b4",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "trailing_powerline_symbol": "\ue0b0 ",
+
+          "template": " \uf418 {{ .Ref }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+
           "properties": {
             "branch_template": "{{ trunc 25 .Branch }}",
             "fetch_stash_count": true,
             "fetch_status": true,
             "fetch_upstream_icon": false
-          },
-          "template": " \uf418 {{ .Ref }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
+          }
         },
         {
-          "properties.display_exit": false,
           "type": "status",
           "trailing_diamond": "\ue0b4",
           "style": "diamond",
-          "foreground": "#95f5a3",
-          "background": "#4a4c70",
-          "background_templates": ["{{ if gt .Code 0 }}#000000{ end }}"],
-          "foreground_templates": ["{{ if gt .Code 0 }}#ee3003{{ end }}"],
-          "template": "{{ if gt .Code 0 }} \uebb4<#bb9af7> {{ .Code }}</>{{ else }} \uebb4 {{ end }}",
+          "foreground": "p:code-green",
+          "background": "p:info-bg",
+          "foreground_templates": ["{{ if gt .Code 0 }}p:code-red{{ end }}"],
+          "background_templates": ["{{ if gt .Code 0 }}p:info-bg{{ end }}"],
+          "template": "{{ if gt .Code 0 }} \uebb4 {{ else }} \uebb4 {{ end }}",
+
+          "properties.display_exit": false,
+          "properties": {
+            "prefix": " ",
+            "postfix": " \u2800",
+            "display_exit": false,
+            "always_enabled": true
+          }
+        },
+
+        {
+          "type": "status",
+          "trailing_diamond": "\ue0b4",
+          "style": "diamond",
+
+          "foreground": "p:info-fg",
+          "background": "p:info-bg",
+          "foreground_templates": ["{{ if gt .Code 0 }}p:info-warn{{ end }}"],
+          "background_templates": ["{{ if gt .Code 0 }}p:info-bg{{ end }}"],
+          "template": "{{ if gt .Code 0 }}<i>#{{ .Code}}</i> {{ end }}",
+
+          "properties.display_exit": false,
           "properties": {
             "prefix": " ",
             "postfix": " \u2800",
