@@ -1,33 +1,56 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "version": 3,
+  "palette": {
+    "path-fg": "#bb9af7",
+    "path-bg": "#2c2e3e",
+    "os-fg": "#7aa2f7",
+    "os-bg": "#1a1b26",
+    "root-fg": "#07d100",
+    "root-bg": "#1a1b26",
+    "info-fg": "#f7768e",
+    "info-bg": "#4a4c70"
+  },
   "blocks": [
     {
       "type": "prompt",
       "alignment": "left",
       "segments": [
         {
+          "type": "os",
+          "style": "plain",
+          "foreground": "p:os-fg",
+          "background": "p:os-bg",
+          "template": "{{ if .WSL }}WSL {{ end }}{{ .Icon }} ",
           "properties": {
             "cache_duration": "none"
-          },
-          "leading_diamond": "\ue0b6",
-          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} \uf2c0 {{ .UserName}}",
-          "foreground": "#7aa2f7",
-          "background": "#1a1b26",
+          }
+        },
+        {
           "type": "os",
-          "style": "diamond"
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "p:os-fg",
+          "background": "p:os-bg",
+          "template": "{{ if .Root }}<p:root-fg><b>{{ .UserName}}@{{ .HostName }} </b></p:root-fg>{{ else }}<p:os-fg>{{ .UserName }}@{{ .HostName }}</p:os-fg>{{ end }}",
+          "properties": {
+            "cache_duration": "none"
+          }
         },
         {
           "properties": {
             "cache_duration": "none",
             "style": "full"
           },
-          "template": " \uf07c  {{ .Path }} ",
-          "foreground": "#bb9af7",
-          "powerline_symbol": "\ue0c6",
-          "background": "#2c2e3e",
+
+          "foreground": "p:path-fg",
+          "background": "p:path-bg",
+          "foreground_templates": ["p:path-fg"],
+          "background_templates ": ["p:path-bg"],
           "type": "path",
-          "style": "powerline"
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "template": " \uf07c  {{ .Path }} "
         },
         {
           "background": "#3b3d57",
@@ -44,7 +67,7 @@
             "{{ if gt .Behind 0 }}#B388FF{{ end }}"
           ],
           "foreground": "#7dcfff",
-          "leading_diamond": "\ue0b6",
+          "style": "powerline",
           "powerline_symbol": "\ue0b0",
           "properties": {
             "branch_template": "{{ trunc 25 .Branch }}",
@@ -52,7 +75,6 @@
             "fetch_status": true,
             "fetch_upstream_icon": false
           },
-          "style": "powerline",
           "template": " \uf418 {{ .Ref }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "trailing_diamond": "\ue0b4",
           "type": "git"
@@ -201,14 +223,6 @@
           "style": "plain",
           "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
           "type": "aws"
-        },
-        {
-          "background": "#ffff66",
-          "foreground": "#111111",
-          "powerline_symbol": "\ue0b0",
-          "style": "diamond",
-          "template": " \uf0ad ",
-          "type": "root"
         },
         {
           "properties": {

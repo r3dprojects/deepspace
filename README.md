@@ -1,2 +1,3 @@
-# deepspace
-omp DeepSpace Theme
+# DeepSpace OMP v1
+
+SecDevOps Theme
