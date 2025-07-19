@@ -30,11 +30,15 @@
         },
         {
           "type": "os",
-          "style": "powerline",
-          "powerline_symbol": "",
+          "style": "plain",
+          "powerline_symbol": "\ue0b0",
           "foreground": "p:os-fg",
           "background": "p:os-bg",
-          "template": "{{ if .Root }}<p:root-fg><b>{{ .UserName}}@{{ .HostName }} </b></p:root-fg>{{ else }}<p:os-fg>{{ .UserName }}@{{ .HostName }} </p:os-fg>{{ end }}",
+          "foreground_templates": [
+            "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
+          ],
+          "background_templates ": ["p:path-bg"],
+          "template": "{{ if .Root }}<b>{{ .UserName}}@{{ .HostName }}</b>{{ else }}{{ .UserName }}@{{ .HostName }}{{ end }} ",
           "properties": {
             "cache_duration": "none"
           }
