@@ -4,9 +4,9 @@
   "palette": {
     "path-fg": "#bb9af7",
     "path-bg": "#2c2e3e",
-    "os-fg": "#7aa2f7",
+    "os-fg": "#7dcfff",
     "os-bg": "#1a1b26",
-    "root-fg": "#07d100",
+    "root-fg": "#96ff9c",
     "root-bg": "#1a1b26",
     "info-fg": "#f7768e",
     "info-bg": "#4a4c70",
@@ -74,10 +74,8 @@
         },
         {
           "type": "git",
-          "trailing_diamond": "\ue0b4",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
-          "trailing_powerline_symbol": "\ue0b0 ",
 
           "foreground": "p:git-fg",
           "background": "p:git-bg",
@@ -107,6 +105,7 @@
           "type": "status",
           "trailing_diamond": "\ue0b4",
           "style": "diamond",
+
           "foreground": "p:code-green",
           "background": "p:info-bg",
           "foreground_templates": ["{{ if gt .Code 0 }}p:code-red{{ end }}"],
@@ -124,8 +123,8 @@
 
         {
           "type": "status",
-          "trailing_diamond": "\ue0b4",
           "style": "diamond",
+          "trailing_diamond": "\ue0b4",
 
           "foreground": "p:info-fg",
           "background": "p:info-bg",
@@ -155,8 +154,8 @@
             "threshold": 500
           },
           "leading_diamond": "\ue0b6",
-          "template": " \uf252 {{ .FormattedMs }} ",
-          "foreground": "#7dcfff",
+          "template": "\uf017 {{ .FormattedMs }} ",
+          "foreground": "p:os-fg",
           "background": "#2c2e3e",
           "type": "executiontime",
           "style": "diamond"
@@ -301,7 +300,7 @@
             "always_enabled": true,
             "cache_duration": "none"
           },
-          "template": "<#7aa2f7>❯</><#bb9af7>❯</><#7dcfff>❯</> ",
+          "template": "<#7aa2f7>❯</><#bb9af7>❯</><#7dcfff>❯</>",
           "type": "text",
           "style": "plain"
         }
