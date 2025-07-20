@@ -6,6 +6,8 @@
     "path-bg": "#2c2e3e",
     "os-fg": "#7dcfff",
     "os-bg": "#1a1b26",
+    "term-fg": "#7dcfff",
+    "term-bg": "#2c2e3e",
     "root-fg": "#96ff9c",
     "root-bg": "#1a1b26",
     "info-fg": "#f7768e",
@@ -41,8 +43,8 @@
         },
         {
           "type": "os",
-          "style": "plain",
-          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "trailing_powerline_symbol": "\ue0b0",
 
           "foreground": "p:os-fg",
           "background": "p:os-bg",
@@ -147,26 +149,26 @@
       "alignment": "right",
       "segments": [
         {
+          "leading_diamond": "\ue0b6",
+          "template": "\uf017 {{ .FormattedMs }} ",
+          "foreground": "p:term-fg",
+          "background": "p:term-bg",
+          "type": "executiontime",
+          "style": "diamond",
           "properties": {
             "always_enabled": true,
             "cache_duration": "none",
             "style": "austin",
             "threshold": 500
-          },
-          "leading_diamond": "\ue0b6",
-          "template": "\uf017 {{ .FormattedMs }} ",
-          "foreground": "p:os-fg",
-          "background": "#2c2e3e",
-          "type": "executiontime",
-          "style": "diamond"
+          }
         },
         {
           "leading_diamond": "\ue0b6",
           "powerline_symbol": "\uE0B0",
           "type": "command",
           "style": "plain",
-          "foreground": "#7dcfff",
-          "background": "#2c2e3e",
+          "foreground": "p:term-fg",
+          "background": "p:term-bg",
           "properties": {
             "shell": "bash",
             "style": "full",
@@ -174,6 +176,18 @@
             "command": "echo $(tput cols </dev/tty 2>/dev/null || echo 80)×$(tput lines </dev/tty 2>/dev/null || echo 24)"
           },
           "template": "\ueb4c {{ .Output }} "
+        },
+        {
+          "type": "sysinfo",
+          "powerline_symbol": "",
+          "foreground": "p:term-fg",
+          "background": "p:term-bg",
+          "template": "\ue266 {{ round .PhysicalPercentUsed .Precision  }}% \udb80\uddbc {{ round .SwapPercentUsed .Precision  }}% ",
+          "properties": {
+            "precision": 0,
+            "cache_duration": "none"
+          },
+          "style": "plain"
         },
         {
           "type": "battery",
@@ -268,17 +282,18 @@
           "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
           "type": "aws"
         },
+
         {
-          "properties": {
-            "cache_duration": "none"
-          },
           "trailing_diamond": "\ue0b4",
-          "template": " \uf017 {{ .CurrentDate | date \"Jan 02\" }} {{ .CurrentDate | date \"15:04\" }} ",
-          "foreground": "#7dcfff",
-          "background": "#2c2e3e",
+          "template": " {{ .CurrentDate | date \"Jan 02\" }} {{ .CurrentDate | date \"15:04\" }} ",
+          "foreground": "p:term-fg",
+          "background": "p:term-bg",
           "type": "time",
           "style": "diamond",
-          "min_width": 70
+          "min_width": 111,
+          "properties": {
+            "cache_duration": "none"
+          }
         }
       ]
     },
