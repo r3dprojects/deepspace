@@ -34,11 +34,117 @@
     {
       "type": "prompt",
       "alignment": "left",
+
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:os-fg",
+          "template": "┌─ "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "battery",
+          "style": "powerline",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#f36943",
+          "background_templates": [
+            "{{if lt .Percentage 20}}#ff0000{{end}}",
+            "{{if and (ge .Percentage 20) (lt .Percentage 50)}}#ff8800{{end}}",
+            "{{if and (ge .Percentage 50) (lt .Percentage 80)}}#ffff00{{end}}",
+            "{{if ge .Percentage 80}}#00ff00{{end}}"
+          ],
+          "properties": {
+            "discharging_icon": "🔋",
+            "charging_icon": "🔌",
+            "charged_icon": "🔋",
+            "not_charging_icon": "🚫",
+            "display_error": true
+          },
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}%{{ end }} "
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "p:node-fg",
+          "background": "p:node-bg",
+          "template": " \ued44\u2008 ",
+          "properties": {
+            "fetch_version": true
+          }
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "p:go-fg",
+          "background": "p:go-bg",
+          "template": "\u2008\udb81\udfd3\u2008\u2008",
+          "properties": {
+            "fetch_version": false
+          }
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:python-fg",
+          "background": "p:python-bg",
+          "template": " \ue73c ",
+          "properties": {
+            "display_mode": "context",
+            "fetch_virtual_env": false,
+            "fetch_version": false
+          }
+        },
+        {
+          "type": "aws",
+          "style": "plain",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "p:aws-fg",
+          "background": "p:aws-bg",
+          "background_templates": [
+            "{{if contains \"default\" .Profile}}p:aws-bg{{end}}",
+            "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
+          ],
+          "template": " \udb83\ude0f ",
+          "properties": {
+            "display_default": true
+          }
+        },
+        {
+          "trailing_diamond": "\ue0b4",
+          "template": " {{ .CurrentDate | date \"15:04PM\" }}",
+          "foreground": "p:term-fg",
+          "background": "p:term-bg",
+          "type": "time",
+          "style": "diamond",
+          "min_width": 126,
+          "properties": {
+            "cache_duration": "none"
+          }
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:term-fg",
+
+          "template": "─┐"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
       "segments": [
         {
           "type": "os",
           "style": "plain",
-
           "foreground": "p:os-fg",
           "background": "p:os-bg",
           "foreground_templates": [
@@ -54,7 +160,6 @@
           "type": "os",
           "style": "powerline",
           "trailing_powerline_symbol": "\ue0b0",
-
           "foreground": "p:os-fg",
           "background": "p:os-bg",
           "foreground_templates": [
@@ -62,7 +167,6 @@
           ],
           "background_templates ": ["p:path-bg"],
           "template": "{{ if .Root }}<b>{{ .UserName}}@{{ .HostName }}</b>{{ else }}{{ .UserName }}@{{ .HostName }}{{ end }} ",
-
           "properties": {
             "cache_duration": "none"
           }
@@ -71,13 +175,11 @@
           "type": "path",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
-
           "foreground": "p:path-fg",
           "background": "p:path-bg",
           "foreground_templates": ["p:path-fg"],
           "background_templates ": ["p:path-bg"],
           "template": " \uf07c  {{ .Path }} ",
-
           "properties": {
             "cache_duration": "none",
             "style": "full"
@@ -87,7 +189,6 @@
           "type": "git",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
-
           "foreground": "p:git-fg",
           "background": "p:git-bg",
           "foreground_templates": [
@@ -102,9 +203,7 @@
             "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
             "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
           ],
-
           "template": " \uf418 {{ .Ref }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
-
           "properties": {
             "branch_template": "{{ trunc 25 .Branch }}",
             "fetch_stash_count": true,
@@ -116,13 +215,11 @@
           "type": "status",
           "trailing_diamond": "\ue0b4",
           "style": "diamond",
-
           "foreground": "p:code-green",
           "background": "p:info-bg",
           "foreground_templates": ["{{ if gt .Code 0 }}p:code-red{{ end }}"],
           "background_templates": ["{{ if gt .Code 0 }}p:info-bg{{ end }}"],
           "template": "{{ if gt .Code 0 }} \uebb4 {{ else }} \uebb4 {{ end }}",
-
           "properties.display_exit": false,
           "properties": {
             "prefix": " ",
@@ -131,18 +228,15 @@
             "always_enabled": true
           }
         },
-
         {
           "type": "status",
           "style": "diamond",
           "trailing_diamond": "\ue0b4",
-
           "foreground": "p:info-fg",
           "background": "p:info-bg",
           "foreground_templates": ["{{ if gt .Code 0 }}p:info-warn{{ end }}"],
           "background_templates": ["{{ if gt .Code 0 }}p:info-bg{{ end }}"],
           "template": "{{ if gt .Code 0 }}<i>#{{ .Code}}</i> {{ end }}",
-
           "properties.display_exit": false,
           "properties": {
             "prefix": " ",
@@ -188,7 +282,7 @@
         },
         {
           "type": "sysinfo",
-          "powerline_symbol": "",
+          "powerline_symbol": "",
           "foreground": "p:term-fg",
           "background": "p:term-bg",
           "template": "\ue266 {{ round .PhysicalPercentUsed .Precision  }}% \udb80\uddbc {{ round .SwapPercentUsed .Precision  }}% ",
@@ -199,93 +293,10 @@
           "style": "plain"
         },
         {
-          "type": "battery",
-          "style": "powerline",
-          "powerline_symbol": "\uE0B0",
-          "foreground": "#ffffff",
-          "background": "#f36943",
-          "background_templates": [
-            "{{if lt .Percentage 20}}#ff0000{{end}}",
-            "{{if and (ge .Percentage 20) (lt .Percentage 50)}}#ff8800{{end}}",
-            "{{if and (ge .Percentage 50) (lt .Percentage 80)}}#ffff00{{end}}",
-            "{{if ge .Percentage 80}}#00ff00{{end}}"
-          ],
-          "properties": {
-            "discharging_icon": "🔋",
-            "charging_icon": "🔌",
-            "charged_icon": "🔋",
-            "not_charging_icon": "🚫",
-            "display_error": true
-          },
-          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}%{{ end }} "
-        },
-        {
-          "type": "node",
+          "type": "text",
           "style": "plain",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "p:node-fg",
-          "background": "p:node-bg",
-          "template": " \ued44\u2008 ",
-
-          "properties": {
-            "fetch_version": true
-          }
-        },
-        {
-          "type": "go",
-          "style": "plain",
-
-          "foreground": "p:go-fg",
-          "background": "p:go-bg",
-          "template": "\u2008\udb81\udfd3\u2008\u2008",
-
-          "properties": {
-            "fetch_version": false
-          }
-        },
-        {
-          "type": "python",
-          "style": "plain",
-
-          "foreground": "p:python-fg",
-          "background": "p:python-bg",
-          "template": " \ue73c ",
-          "properties": {
-            "display_mode": "context",
-            "fetch_virtual_env": false,
-            "fetch_version": false
-          }
-        },
-
-        {
-          "type": "aws",
-          "style": "plain",
-          "powerline_symbol": "\ue0b0",
-
-          "foreground": "p:aws-fg",
-          "background": "p:aws-bg",
-          "background_templates": [
-            "{{if contains \"default\" .Profile}}p:aws-bg{{end}}",
-            "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
-          ],
-
-          "template": " \udb83\ude0f ",
-          "properties": {
-            "display_default": true
-          }
-        },
-
-        {
-          "trailing_diamond": "\ue0b4",
-          "template": " {{ .CurrentDate | date \"Jan 02\" }} {{ .CurrentDate | date \"15:04\" }} ",
           "foreground": "p:term-fg",
-          "background": "p:term-bg",
-          "type": "time",
-          "style": "diamond",
-          "min_width": 126,
-          "properties": {
-            "cache_duration": "none"
-          }
+          "template": "─┘"
         }
       ]
     },
