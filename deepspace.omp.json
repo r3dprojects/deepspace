@@ -15,9 +15,18 @@
     "info-warn": "#c4fbff",
     "git-fg": "#7dcfff",
     "git-bg": "#3b3d57",
-    "git-ahead": "#B388FF",
-    "git-behind": "#B388FF",
-    "git-changed": "#bb9af7",
+    "git-ahead": "#00c57a",
+    "git-behind": "#007045",
+    "git-fg-changed": "#3b3d57",
+    "git-changed": "#B388FF",
+    "aws-fg": "#000000",
+    "aws-bg": "#FFA400",
+    "node-fg": "#FFFFFF",
+    "node-bg": "#6CA35E",
+    "go-fg": "#111111",
+    "go-bg": "#8ED1F7",
+    "python-fg": "#003768",
+    "python-bg": "#ffd43b",
     "code-green": "#95f5a3",
     "code-red": "#ee3003"
   },
@@ -81,17 +90,17 @@
 
           "foreground": "p:git-fg",
           "background": "p:git-bg",
+          "foreground_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-fg-changed{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-fg-changed{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git-fg-changed{{ end }}",
+            "{{ if gt .Behind 0 }}p:git-fg-changed{ end }}"
+          ],
           "background_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-changed{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-changed{{ end }}",
             "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
             "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
-          ],
-          "foreground_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-changed{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-changed{{ end }}",
-            "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
-            "{{ if gt .Behind 0 }}p:git-ahead{{ end }}"
           ],
 
           "template": " \uf418 {{ .Ref }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
@@ -211,76 +220,59 @@
           "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}%{{ end }} "
         },
         {
-          "background": "#6CA35E",
-          "foreground": "#ffffff",
+          "type": "node",
+          "style": "plain",
           "powerline_symbol": "\ue0b0",
+          "foreground": "p:node-fg",
+          "background": "p:node-bg",
+          "template": " \ued44\u2008 ",
+
           "properties": {
             "fetch_version": true
-          },
-          "style": "plain",
-          "template": " \ued44 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }} {{ .Full }} ",
-          "type": "node"
+          }
         },
         {
-          "background": "#8ED1F7",
-          "foreground": "#111111",
-          "powerline_symbol": "\ue0b0",
-          "properties": {
-            "fetch_version": true
-          },
+          "type": "go",
           "style": "plain",
-          "template": " \udb81\udfd3 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
-          "type": "go"
-        },
-        {
-          "background": "#ffd43b",
-          "foreground": "#003768",
-          "powerline_symbol": "\ue0b0",
+
+          "foreground": "p:go-fg",
+          "background": "p:go-bg",
+          "template": "\u2008\udb81\udfd3\u2008\u2008",
+
           "properties": {
-            "display_mode": "files",
-            "fetch_virtual_env": false
-          },
-          "style": "plain",
-          "template": " <#4b8bbe>\ue235</> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
-          "type": "python"
-        },
-        {
-          "background": "#AE1401",
-          "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
-          "properties": {
-            "display_mode": "files",
-            "fetch_version": true
-          },
-          "style": "plain",
-          "template": " \ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
-          "type": "ruby"
-        },
-        {
-          "background": "#FEAC19",
-          "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
-          "properties": {
-            "display_mode": "files",
             "fetch_version": false
-          },
-          "style": "plain",
-          "template": " \uf0e7{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
-          "type": "azfunc"
+          }
         },
         {
+          "type": "python",
+          "style": "plain",
+
+          "foreground": "p:python-fg",
+          "background": "p:python-bg",
+          "template": " \ue73c ",
+          "properties": {
+            "display_mode": "context",
+            "fetch_virtual_env": false,
+            "fetch_version": false
+          }
+        },
+
+        {
+          "type": "aws",
+          "style": "plain",
+          "powerline_symbol": "\ue0b0",
+
+          "foreground": "p:aws-fg",
+          "background": "p:aws-bg",
           "background_templates": [
-            "{{if contains \"default\" .Profile}}#FFA400{{end}}",
+            "{{if contains \"default\" .Profile}}p:aws-bg{{end}}",
             "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
           ],
-          "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
+
+          "template": " \udb83\ude0f ",
           "properties": {
-            "display_default": false
-          },
-          "style": "plain",
-          "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
-          "type": "aws"
+            "display_default": true
+          }
         },
 
         {
@@ -290,7 +282,7 @@
           "background": "p:term-bg",
           "type": "time",
           "style": "diamond",
-          "min_width": 111,
+          "min_width": 126,
           "properties": {
             "cache_duration": "none"
           }
