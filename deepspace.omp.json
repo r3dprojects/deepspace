@@ -40,7 +40,21 @@
           "type": "text",
           "style": "plain",
           "foreground": "p:os-fg",
-          "template": "┌─ "
+          "template": "\u256d\u2500"
+        },
+        {
+          "type": "path",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "p:path-fg",
+          "background": "p:path-bg",
+          "foreground_templates": ["p:path-fg"],
+          "background_templates ": ["p:path-bg"],
+          "template": " \uf07c  {{ .Path }} ",
+          "properties": {
+            "cache_duration": "none",
+            "style": "agnoster_full"
+          }
         }
       ]
     },
@@ -134,7 +148,7 @@
           "style": "plain",
           "foreground": "p:term-fg",
 
-          "template": "─┐"
+          "template": "\u2500\u256e"
         }
       ]
     },
@@ -182,7 +196,7 @@
           "template": " \uf07c  {{ .Path }} ",
           "properties": {
             "cache_duration": "none",
-            "style": "full"
+            "style": "folder"
           }
         },
         {
@@ -296,7 +310,7 @@
           "type": "text",
           "style": "plain",
           "foreground": "p:term-fg",
-          "template": "─┘"
+          "template": "\u2500\u256f"
         }
       ]
     },
