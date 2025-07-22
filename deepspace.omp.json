@@ -43,17 +43,44 @@
           "template": "\u256d\u2500"
         },
         {
-          "type": "path",
+          "type": "os",
+          "style": "powerline",
+          "trailing_powerline_symbol": "\ue0b0",
+          "foreground": "p:os-fg",
+          "background": "p:os-bg",
+          "foreground_templates": [
+            "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
+          ],
+          "background_templates ": ["p:path-bg"],
+          "template": "{{ if .Root }}<b>{{ .UserName}}@{{ .HostName }}</b>{{ else }}{{ .UserName }}@{{ .HostName }}{{ end }} ",
+          "properties": {
+            "cache_duration": "none"
+          }
+        },
+        {
+          "type": "git",
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
-          "foreground": "p:path-fg",
-          "background": "p:path-bg",
-          "foreground_templates": ["p:path-fg"],
-          "background_templates ": ["p:path-bg"],
-          "template": " \uf07c  {{ .Path }} ",
+          "foreground": "p:git-fg",
+          "background": "p:git-bg",
+          "foreground_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-fg-changed{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-fg-changed{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git-fg-changed{{ end }}",
+            "{{ if gt .Behind 0 }}p:git-fg-changed{ end }}"
+          ],
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-changed{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-changed{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
+            "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
+          ],
+          "template": " \uf418 {{ .Ref }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "properties": {
-            "cache_duration": "none",
-            "style": "agnoster_full"
+            "branch_template": "{{ trunc 25 .Branch }}",
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": false
           }
         }
       ]
@@ -132,8 +159,23 @@
           }
         },
         {
+          "leading_diamond": "\ue0b6",
+          "powerline_symbol": "\uE0B0",
+          "type": "command",
+          "style": "plain",
+          "foreground": "p:term-fg",
+          "background": "p:term-bg",
+          "properties": {
+            "shell": "bash",
+            "style": "full",
+            "cache_duration": "none",
+            "command": "echo $(tput cols </dev/tty 2>/dev/null || echo 80)×$(tput lines </dev/tty 2>/dev/null || echo 24)"
+          },
+          "template": " \ueb4c {{ .Output }} "
+        },
+        {
           "trailing_diamond": "\ue0b4",
-          "template": " {{ .CurrentDate | date \"15:04PM\" }}",
+          "template": "{{ .CurrentDate | date \"15:04PM\" }}",
           "foreground": "p:term-fg",
           "background": "p:term-bg",
           "type": "time",
@@ -170,21 +212,7 @@
             "cache_duration": "none"
           }
         },
-        {
-          "type": "os",
-          "style": "powerline",
-          "trailing_powerline_symbol": "\ue0b0",
-          "foreground": "p:os-fg",
-          "background": "p:os-bg",
-          "foreground_templates": [
-            "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
-          ],
-          "background_templates ": ["p:path-bg"],
-          "template": "{{ if .Root }}<b>{{ .UserName}}@{{ .HostName }}</b>{{ else }}{{ .UserName }}@{{ .HostName }}{{ end }} ",
-          "properties": {
-            "cache_duration": "none"
-          }
-        },
+
         {
           "type": "path",
           "style": "powerline",
@@ -196,35 +224,10 @@
           "template": " \uf07c  {{ .Path }} ",
           "properties": {
             "cache_duration": "none",
-            "style": "folder"
+            "style": "full"
           }
         },
-        {
-          "type": "git",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "p:git-fg",
-          "background": "p:git-bg",
-          "foreground_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-fg-changed{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-fg-changed{{ end }}",
-            "{{ if gt .Ahead 0 }}p:git-fg-changed{{ end }}",
-            "{{ if gt .Behind 0 }}p:git-fg-changed{ end }}"
-          ],
-          "background_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-changed{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-changed{{ end }}",
-            "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
-            "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
-          ],
-          "template": " \uf418 {{ .Ref }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
-          "properties": {
-            "branch_template": "{{ trunc 25 .Branch }}",
-            "fetch_stash_count": true,
-            "fetch_status": true,
-            "fetch_upstream_icon": false
-          }
-        },
+
         {
           "type": "status",
           "trailing_diamond": "\ue0b4",
@@ -279,27 +282,13 @@
             "threshold": 500
           }
         },
-        {
-          "leading_diamond": "\ue0b6",
-          "powerline_symbol": "\uE0B0",
-          "type": "command",
-          "style": "plain",
-          "foreground": "p:term-fg",
-          "background": "p:term-bg",
-          "properties": {
-            "shell": "bash",
-            "style": "full",
-            "cache_duration": "none",
-            "command": "echo $(tput cols </dev/tty 2>/dev/null || echo 80)×$(tput lines </dev/tty 2>/dev/null || echo 24)"
-          },
-          "template": "\ueb4c {{ .Output }} "
-        },
+
         {
           "type": "sysinfo",
           "powerline_symbol": "",
           "foreground": "p:term-fg",
           "background": "p:term-bg",
-          "template": "\ue266 {{ round .PhysicalPercentUsed .Precision  }}% \udb80\uddbc {{ round .SwapPercentUsed .Precision  }}% ",
+          "template": "\ue266 {{ round .PhysicalPercentUsed .Precision  }}% \udb80\uddbc {{ round .SwapPercentUsed .Precision }}% ",
           "properties": {
             "precision": 0,
             "cache_duration": "none"
