@@ -63,5 +63,12 @@
     "properties": {
       "fetch_version": true
     }
+  },
+  {
+    "type": "text",
+    "style": "plain",
+    "foreground": "#ffffff",
+    "background": "#000000",
+    "template": "DEBUG: {{ .Env.COLUMNS }} "
   }
 ]
