@@ -1,5 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "var": {
+    "TLRG": "160",
+    "TMED": "120",
+    "TSML": "80"
+  },
   "version": 3,
   "palette": {
     "path-fg": "#bb9af7",
@@ -30,20 +35,7 @@
     "code-green": "#95f5a3",
     "code-red": "#ee3003"
   },
-  "var": {
-    "min-sml": 50,
-    "max-sml": 80,
-    "min-med": 81,
-    "max-med": 120,
-    "min-lrg": 121,
-    "max-lrg": 999,
-    "size": "medium",
-    "widths": {
-      "small": { "max": 80, "min": 50 },
-      "medium": { "max": 120, "min": 81 },
-      "large": { "max": 999, "min": 121 }
-    }
-  },
+
   "blocks": [
     {
       "type": "prompt",
@@ -99,6 +91,7 @@
         }
       ]
     },
+
     {
       "type": "prompt",
       "alignment": "right",
@@ -131,75 +124,38 @@
           "powerline_symbol": "\ue0b0",
           "foreground": "p:node-fg",
           "background": "p:node-bg",
-          "template": " \ued44\u2008  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }} {{ .Full }} ",
+          "template": " \ued44\u2008{{ if .PackageManagerIcon }} {{ .PackageManagerIcon }} {{ end }}{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} ",
           "properties": {
+            "fetch_version": true,
+            "fetch_package_manager": true
+          }
+        },
+
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "p:go-fg",
+          "background": "p:go-bg",
+          "template": "\u2008\udb81\udfd3\u2008\u2008{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} ",
+          "properties": {
+            "always_enabled": true,
+            "fetch_version": false
+          }
+        },
+
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:python-fg",
+          "background": "p:python-bg",
+          "template": " \ue235 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} ",
+          "properties": {
+            "display_mode": "context",
+            "fetch_virtual_env": false,
             "fetch_version": true
-          },
-
-          "min_width": 100
-        },
-        {
-          "type": "node",
-          "style": "plain",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "p:node-fg",
-          "background": "p:node-bg",
-          "template": " \ued44\u2008 ",
-          "properties": {
-            "fetch_version": false
-          },
-          "max_width": 99
+          }
         },
 
-        {
-          "type": "go",
-          "style": "plain",
-          "foreground": "p:go-fg",
-          "background": "p:go-bg",
-          "template": "\u2008\udb81\udfd3\u2008\u2008 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
-          "properties": {
-            "fetch_version": false
-          },
-          "min_width": 100
-        },
-
-        {
-          "type": "go",
-          "style": "plain",
-          "foreground": "p:go-fg",
-          "background": "p:go-bg",
-          "template": "\u2008\udb81\udfd3\u2008\u2008",
-          "properties": {
-            "fetch_version": false
-          },
-          "max_width": 99
-        },
-        {
-          "type": "python",
-          "style": "plain",
-          "foreground": "p:python-fg",
-          "background": "p:python-bg",
-          "template": " \ue73c {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}3.25.1 ",
-          "properties": {
-            "display_mode": "context",
-            "fetch_virtual_env": false,
-            "fetch_version": false
-          },
-          "min_width": 100
-        },
-        {
-          "type": "python",
-          "style": "plain",
-          "foreground": "p:python-fg",
-          "background": "p:python-bg",
-          "template": " \ue73c ",
-          "properties": {
-            "display_mode": "context",
-            "fetch_virtual_env": false,
-            "fetch_version": false
-          },
-          "max_width": 99
-        },
         {
           "type": "aws",
           "style": "plain",
@@ -390,6 +346,7 @@
           "type": "text",
           "style": "plain"
         },
+
         {
           "properties": {
             "always_enabled": true,

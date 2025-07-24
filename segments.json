@@ -56,8 +56,8 @@
     "style": "plain",
     "powerline_symbol": "\ue0b0",
 
-    "foreground": "#111111",
-    "background": "#8ED1F7",
+    "foreground": "p:go-fg",
+    "background": "p:go-bg",
     "template": " \udb81\udfd3 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
 
     "properties": {
@@ -70,5 +70,18 @@
     "foreground": "#ffffff",
     "background": "#000000",
     "template": "DEBUG: {{ .Env.COLUMNS }} "
+  },
+  {
+    "type": "command",
+    "style": "plain",
+    "foreground": "#ffffff",
+    "properties": {
+      "command": "echo $(tput cols </dev/tty 2>/dev/null || echo 80)"
+    },
+    "template": "Width: {{ .Output }}"
+  },
+
+  {
+    "template": " \ued44\u2008 {{ .Var.TLRG }} {{ .Var.TMED }} {{ .Var.TSML }}"
   }
 ]
