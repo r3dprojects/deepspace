@@ -34,7 +34,7 @@
     "python-bg": "#ffd43b",
     "code-green": "#95f5a3",
     "code-red": "#ee3003",
-    "tx": "#ffffff00"
+    "tx": "transparent"
   },
 
   "blocks": [
