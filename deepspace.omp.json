@@ -48,6 +48,9 @@
           "style": "plain",
           "foreground": "p:os-fg",
           "background": "p:tx",
+          "foreground_templates": [
+            "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
+          ],
           "template": "\u256d\u2500"
         },
         {
@@ -124,13 +127,12 @@
         {
           "type": "node",
           "style": "plain",
-          "powerline_symbol": "\ue0b0",
           "foreground": "p:node-fg",
           "background": "p:node-bg",
-          "template": " \ued44\u2008{{ if .PackageManagerIcon }} {{ .PackageManagerIcon }} {{ end }}{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} ",
+          "template": " \ued44\u2008 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Major }}.{{ .Minor }}{{ else }}{{ .Major }}{{ end }} ",
           "properties": {
             "fetch_version": true,
-            "fetch_package_manager": true
+            "fetch_package_manager": false
           }
         },
 
@@ -169,7 +171,7 @@
             "{{if contains \"default\" .Profile}}p:aws-bg{{end}}",
             "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
           ],
-          "template": " \udb83\ude0f ",
+          "template": " \uf0ef  ",
           "properties": {
             "display_default": true
           }
@@ -205,6 +207,9 @@
           "type": "text",
           "style": "plain",
           "foreground": "p:term-fg",
+          "foreground_templates": [
+            "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
+          ],
 
           "template": "\u2500\u256e"
         }
@@ -240,25 +245,9 @@
           "template": " \uf07c  {{ .Path }} ",
           "properties": {
             "cache_duration": "none",
+            "folder_icon": "\uf07c ",
             "style": "full"
-          },
-          "min_width": 120
-        },
-
-        {
-          "type": "path",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "p:path-fg",
-          "background": "p:path-bg",
-          "foreground_templates": ["p:path-fg"],
-          "background_templates ": ["p:path-bg"],
-          "template": " \uf07c  {{ .Path }} ",
-          "properties": {
-            "cache_duration": "none",
-            "style": "agnoster_short"
-          },
-          "max_width": 119
+          }
         },
 
         {
@@ -332,6 +321,9 @@
           "type": "text",
           "style": "plain",
           "foreground": "p:term-fg",
+          "foreground_templates": [
+            "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
+          ],
           "template": "\u2500\u256f"
         }
       ]
@@ -341,13 +333,17 @@
       "alignment": "left",
       "segments": [
         {
+          "type": "text",
+          "style": "plain",
+
+          "foreground": "#7aa2f7",
+          "foreground_templates": [
+            "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
+          ],
+          "template": "\u2570\u2500",
           "properties": {
             "cache_duration": "none"
-          },
-          "template": "\u2570\u2500",
-          "foreground": "#7aa2f7",
-          "type": "text",
-          "style": "plain"
+          }
         },
 
         {

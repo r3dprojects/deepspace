@@ -83,5 +83,9 @@
 
   {
     "template": " \ued44\u2008 {{ .Var.TLRG }} {{ .Var.TMED }} {{ .Var.TSML }}"
+  },
+
+  {
+    "template": " \ue235 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} "
   }
 ]
