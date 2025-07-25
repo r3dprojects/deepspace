@@ -33,7 +33,8 @@
     "python-fg": "#003768",
     "python-bg": "#ffd43b",
     "code-green": "#95f5a3",
-    "code-red": "#ee3003"
+    "code-red": "#ee3003",
+    "tx": "#ffffff00"
   },
 
   "blocks": [
@@ -46,14 +47,16 @@
           "type": "text",
           "style": "plain",
           "foreground": "p:os-fg",
+          "background": "p:tx",
           "template": "\u256d\u2500"
         },
         {
           "type": "os",
           "style": "powerline",
-          "trailing_powerline_symbol": "\ue0b0",
+          "powerline_symbol": "\ue0b0",
+          "leading_powerline_symbol": "\u2588",
           "foreground": "p:os-fg",
-          "background": "p:os-bg",
+          "background": "p:term-bg",
           "foreground_templates": [
             "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
           ],
@@ -138,8 +141,8 @@
           "background": "p:go-bg",
           "template": "\u2008\udb81\udfd3\u2008\u2008{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} ",
           "properties": {
-            "always_enabled": true,
-            "fetch_version": false
+            "fetch_version": true,
+            "cache_duration": "none"
           }
         },
 
@@ -215,11 +218,11 @@
           "type": "os",
           "style": "plain",
           "foreground": "p:os-fg",
-          "background": "p:os-bg",
+          "background": "p:tx",
           "foreground_templates": [
             "{{ if .Root }}p:root-fg{{ else }}p:os-fg{{ end }}"
           ],
-          "background_templates ": ["p:os-bg"],
+          "background_templates ": ["p:term-bg"],
           "template": "{{ if .WSL }}WSL {{ end }}{{ .Icon }} ",
           "properties": {
             "cache_duration": "none"
