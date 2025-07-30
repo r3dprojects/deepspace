@@ -13,7 +13,7 @@
     "os-bg": "#1a1b26",
     "term-fg": "#7dcfff",
     "term-bg": "#2c2e3e",
-    "root-fg": "#96ff9c",
+    "root-fg": "#95f5a3",
     "root-bg": "#1a1b26",
     "info-fg": "#f7768e",
     "info-bg": "#4a4c70",
@@ -34,6 +34,14 @@
     "python-bg": "#ffd43b",
     "code-green": "#95f5a3",
     "code-red": "#ee3003",
+    "cycle-0": "#B388FF",
+    "cycle-1": "#B388FF",
+    "cycle-2": "#aa94ff",
+    "cycle-3": "#a1a0ff",
+    "cycle-4": "#98acff",
+    "cycle-5": "#8fb8ff",
+    "cycle-6": "#86c4ff",
+    "cycle-7": "#7dcfff",
     "tx": "transparent"
   },
 
@@ -246,6 +254,19 @@
           "properties": {
             "cache_duration": "none",
             "folder_icon": "\uf07c ",
+            "cycle": [
+              "p:cycle-0",
+              "p:cycle-1",
+              "p:cycle-1",
+              "p:cycle-2",
+              "p:cycle-2",
+              "p:cycle-3",
+              "p:cycle-4",
+              "p:cycle-5",
+              "p:cycle-6",
+              "p:cycle-7"
+            ],
+            "cycle_folder_separator": true,
             "style": "full"
           }
         },
