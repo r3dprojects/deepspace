@@ -134,10 +134,12 @@
 
         {
           "type": "node",
-          "style": "plain",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
           "foreground": "p:node-fg",
           "background": "p:node-bg",
-          "template": " \ued44\u2008 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Major }}.{{ .Minor }}{{ else }}{{ .Major }}{{ end }} ",
+          "template": "\ued44 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}} {{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }} {{ .Major }}.{{ .Minor }}{{ else }}{{ end }}",
           "properties": {
             "fetch_version": true,
             "fetch_package_manager": false
@@ -146,10 +148,12 @@
 
         {
           "type": "go",
-          "style": "plain",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
           "foreground": "p:go-fg",
           "background": "p:go-bg",
-          "template": "\u2008\udb81\udfd3 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Major }}.{{ .Minor }}{{ else }}{{ end }} ",
+          "template": "\udb81\udfd3\u2008{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Major }}.{{ .Minor }}{{ else }}{{ end }}",
           "properties": {
             "fetch_version": true,
             "cache_duration": "none"
@@ -158,10 +162,12 @@
 
         {
           "type": "python",
-          "style": "plain",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
           "foreground": "p:python-fg",
           "background": "p:python-bg",
-          "template": " \ue235 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Minor }}{{ end }} ",
+          "template": "\ued1b {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Minor }}{{ end }}",
           "properties": {
             "display_mode": "context",
             "fetch_virtual_env": false,
@@ -171,15 +177,16 @@
 
         {
           "type": "aws",
-          "style": "plain",
-          "powerline_symbol": "\ue0b0",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
           "foreground": "p:aws-fg",
           "background": "p:aws-bg",
           "background_templates": [
             "{{if contains \"default\" .Profile}}p:aws-bg{{end}}",
             "{{if contains \"jan\" .Profile}}#f1184c{{end}}"
           ],
-          "template": " \uf0ef  ",
+          "template": "\uf0ef ",
           "properties": {
             "display_default": true
           }
