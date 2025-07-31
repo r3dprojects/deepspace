@@ -34,6 +34,8 @@
     "python-bg": "#ffd43b",
     "terraform-fg": "#5c4ee5",
     "terraform-bg": "#ffffff",
+    "docker-fg": "#ffffff",
+    "docker-bg": "#1D63ED",
     "code-green": "#95f5a3",
     "code-red": "#ee3003",
     "cycle-0": "#B388FF",
@@ -174,6 +176,26 @@
             "display_mode": "context",
             "fetch_virtual_env": false,
             "fetch_version": true
+          }
+        },
+        {
+          "type": "docker",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:docker-fg",
+          "background": "p:docker-bg",
+          "template": "\uf21f {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Context }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Context }}{{ else }}{{ end }}",
+          "properties": {
+            "fetch_context": false,
+            "extensions ": [
+              "compose.yml",
+              "compose.yaml",
+              "docker-compose.yml",
+              "docker-compose.yaml",
+              "Dockerfile"
+            ],
+            "display_mode": "files"
           }
         },
         {
