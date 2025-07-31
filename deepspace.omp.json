@@ -32,6 +32,8 @@
     "go-bg": "#8ED1F7",
     "python-fg": "#003768",
     "python-bg": "#ffd43b",
+    "terraform-fg": "#5c4ee5",
+    "terraform-bg": "#ffffff",
     "code-green": "#95f5a3",
     "code-red": "#ee3003",
     "cycle-0": "#B388FF",
@@ -174,7 +176,18 @@
             "fetch_version": true
           }
         },
-
+        {
+          "type": "terraform",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:terraform-fg",
+          "background": "p:terraform-bg",
+          "template": "\ue8bd{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Version }} {{ .WorkspaceName }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Version }} {{ .WorkspaceName }}{{ else }}{{ end }}",
+          "properties": {
+            "fetch_version": true
+          }
+        },
         {
           "type": "aws",
           "style": "diamond",
