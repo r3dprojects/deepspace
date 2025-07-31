@@ -167,7 +167,7 @@
           "trailing_diamond": "\ue0b4",
           "foreground": "p:python-fg",
           "background": "p:python-bg",
-          "template": "\ued1b {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Minor }}{{ end }}",
+          "template": "\ued1b {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Major }}.{{ .Minor }}{{ else }}{{ .Major }}{{ end }}",
           "properties": {
             "display_mode": "context",
             "fetch_virtual_env": false,
