@@ -149,7 +149,7 @@
           "style": "plain",
           "foreground": "p:go-fg",
           "background": "p:go-bg",
-          "template": "\u2008\udb81\udfd3\u2008\u2008{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} ",
+          "template": "\u2008\udb81\udfd3 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Major }}.{{ .Minor }}{{ else }}{{ end }} ",
           "properties": {
             "fetch_version": true,
             "cache_duration": "none"
@@ -161,7 +161,7 @@
           "style": "plain",
           "foreground": "p:python-fg",
           "background": "p:python-bg",
-          "template": " \ue235 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Major }}{{ end }} ",
+          "template": " \ue235 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Full }}{{ else }}{{ .Minor }}{{ end }} ",
           "properties": {
             "display_mode": "context",
             "fetch_virtual_env": false,
