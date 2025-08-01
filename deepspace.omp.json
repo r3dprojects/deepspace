@@ -150,7 +150,7 @@
           "background": "p:npm-bg",
           "template": "\ued0e\u2008",
           "properties": {
-            "fetch_version": true,
+            "fetch_version": false,
             "cache_duration": "none",
             "home_enabled": false,
             "display_mode": "files",
@@ -172,7 +172,7 @@
           "background": "p:npm-bg",
           "template": "\ue865\u2008",
           "properties": {
-            "fetch_version": true,
+            "fetch_version": false,
             "cache_duration": "none",
             "home_enabled": false,
             "display_mode": "files",
@@ -187,9 +187,9 @@
           "trailing_diamond": "\ue0b4",
           "foreground": "p:node-fg",
           "background": "p:node-bg",
-          "template": "\ued44 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}} {{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ else }}{{ end }}",
+          "template": "\ued44 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ else }}{{ end }}",
           "properties": {
-            "fetch_version": true,
+            "fetch_version": false,
             "fetch_package_manager": false
           }
         },
@@ -201,27 +201,16 @@
           "trailing_diamond": "\ue0b4",
           "foreground": "p:svelte-fg",
           "background": "p:svelte-bg",
-          "template": "\ue8b7",
+          "template": "\u2009\ue8b7\u2009",
           "properties": {
-            "fetch_version": true,
+            "fetch_version": false,
             "home_enabled": false,
-            "display_mode": "files",
+            "display_mode": "context",
             "extensions": [
               "*.svelte",
               "*.svelte.js",
               "*.svelte.ts",
-              "svelte.config.js",
-              "page.svelte",
-              "+page.js",
-              "+page.server.js",
-              "+layout.svelte",
-              "+layout.js",
-              "+layout.server.js",
-              "+layout.ts",
-              "+layout.server.ts",
-              "+server.js",
-              "+server.ts",
-              "+server.svelte"
+              "svelte.config.js"
             ]
           }
         },
