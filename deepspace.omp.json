@@ -155,9 +155,26 @@
             "extensions": [
               "*.php",
               "composer.json",
+              "package.json",
               "composer.lock",
               ".php-version"
             ]
+          }
+        },
+        {
+          "type": "pnpm",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:npm-fg",
+          "background": "p:npm-bg",
+          "template": "\ue865\u2008",
+          "properties": {
+            "fetch_version": true,
+            "cache_duration": "none",
+            "home_enabled": false,
+            "display_mode": "files",
+            "extensions": ["pnpm-lock.yaml"]
           }
         },
 
