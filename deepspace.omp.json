@@ -30,6 +30,10 @@
     "node-bg": "#6CA35E",
     "go-fg": "#111111",
     "go-bg": "#8ED1F7",
+    "php-fg": "#111111",
+    "php-bg": "#777bb3",
+    "npm-fg": "#ffffff",
+    "npm-bg": "#CB3837",
     "python-fg": "#003768",
     "python-bg": "#ffd43b",
     "terraform-fg": "#5c4ee5",
@@ -135,6 +139,27 @@
           },
           "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}%{{ end }} "
         },
+        {
+          "type": "npm",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:npm-fg",
+          "background": "p:npm-bg",
+          "template": "\ued0e\u2008",
+          "properties": {
+            "fetch_version": true,
+            "cache_duration": "none",
+            "home_enabled": false,
+            "display_mode": "files",
+            "extensions": [
+              "*.php",
+              "composer.json",
+              "composer.lock",
+              ".php-version"
+            ]
+          }
+        },
 
         {
           "type": "node",
@@ -178,6 +203,29 @@
             "fetch_version": true
           }
         },
+
+        {
+          "type": "php",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:php-fg",
+          "background": "p:php-bg",
+          "template": "\ued6d\u2008{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}}{{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ .Major }}{{ if .Minor }}.{{ end }}{{ .Minor }}{{ else }}{{ end }}",
+          "properties": {
+            "fetch_version": true,
+            "cache_duration": "none",
+            "home_enabled": false,
+            "display_mode": "files",
+            "extensions": [
+              "*.php",
+              "composer.json",
+              "composer.lock",
+              ".php-version"
+            ]
+          }
+        },
+
         {
           "type": "docker",
           "style": "diamond",
