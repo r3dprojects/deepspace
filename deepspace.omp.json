@@ -40,6 +40,8 @@
     "terraform-bg": "#ffffff",
     "docker-fg": "#ffffff",
     "docker-bg": "#1D63ED",
+    "svelte-fg": "#ffffff",
+    "svelte-bg": "#fd6500",
     "code-green": "#95f5a3",
     "code-red": "#ee3003",
     "cycle-0": "#B388FF",
@@ -185,10 +187,42 @@
           "trailing_diamond": "\ue0b4",
           "foreground": "p:node-fg",
           "background": "p:node-bg",
-          "template": "\ued44 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}} {{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }} {{ .Major }}.{{ .Minor }}{{ else }}{{ end }}",
+          "template": "\ued44 {{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}} {{ .Full }}{{ else if gt $cols (.Var.TMED | atoi) }}{{ else }}{{ end }}",
           "properties": {
             "fetch_version": true,
             "fetch_package_manager": false
+          }
+        },
+
+        {
+          "type": "svelte",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:svelte-fg",
+          "background": "p:svelte-bg",
+          "template": "\ue8b7",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false,
+            "display_mode": "files",
+            "extensions": [
+              "*.svelte",
+              "*.svelte.js",
+              "*.svelte.ts",
+              "svelte.config.js",
+              "page.svelte",
+              "+page.js",
+              "+page.server.js",
+              "+layout.svelte",
+              "+layout.js",
+              "+layout.server.js",
+              "+layout.ts",
+              "+layout.server.ts",
+              "+server.js",
+              "+server.ts",
+              "+server.svelte"
+            ]
           }
         },
 
