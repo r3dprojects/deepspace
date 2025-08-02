@@ -293,7 +293,7 @@
           "trailing_diamond": "\ue0b4",
           "foreground": "p:terraform-fg",
           "background": "p:terraform-bg",
-          "template": "\ue8bd{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}} {{ .Version }} {{ .WorkspaceName }}{{ else if gt $cols (.Var.TMED | atoi) }} {{ .Version }} {{ .WorkspaceName }}{{ else }}{{ end }}",
+          "template": "\ue8bd{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TLRG | atoi)}} {{ .Version }} {{ .WorkspaceName }}{{ else if gt $cols (.Var.TMED | atoi) }} {{ .WorkspaceName }}{{ else }}{{ end }}",
           "properties": {
             "fetch_version": true
           }
