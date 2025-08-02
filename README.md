@@ -1,6 +1,5 @@
 # DeepSpace OMP Theme
 
-```markdown
 ## For use in
 
 BASH ZSH Powershell
@@ -21,14 +20,14 @@ BASH ZSH Powershell
 
 [Oh My Posh Custom Theme](https://ohmyposh.dev/docs/installation/customize)
 
-### BASH
+## BASH
+
+Add to .bashrc
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
-
 export TERMCOLS=$(tput cols)
 trap 'export TERMCOLS=$(tput cols)' SIGWINCH
-
 eval "$(oh-my-posh init bash --config /path/to/deepspace.omp.json)"
 ```
 
@@ -36,9 +35,6 @@ eval "$(oh-my-posh init bash --config /path/to/deepspace.omp.json)"
 
 ```zsh
 export PATH="$HOME/.local/bin:$PATH"
-
 export TERMCOLS=$(tput cols)
 trap 'export TERMCOLS=$(tput cols)' WINCH
-
-eval "$(oh-my-posh init zsh --config /path/to/deepspace.omp.json)"
-```
+eval "$(oh-my-posh init zsh --config /path/to/deepspace.omp.json)"```
