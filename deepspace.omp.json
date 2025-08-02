@@ -380,7 +380,7 @@
           "background": "p:path-bg",
           "foreground_templates": ["p:path-fg"],
           "background_templates ": ["p:path-bg"],
-          "template": " \uf07c  {{ .Path }} ",
+          "template": "{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if gt $cols (.Var.TMED | atoi)}} {{ .Path }} {{ else }}{{ end }}",
           "properties": {
             "cache_duration": "none",
             "folder_icon": "\uf07c ",
@@ -398,6 +398,35 @@
             ],
             "cycle_folder_separator": true,
             "style": "full"
+          }
+        },
+
+        {
+          "type": "path",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "p:path-fg",
+          "background": "p:path-bg",
+          "foreground_templates": ["p:path-fg"],
+          "background_templates ": ["p:path-bg"],
+          "template": "{{ $cols := .Env.TERMCOLS | trim | default \"80\" | atoi }}{{ if le $cols (.Var.TMED | atoi)}} {{ .Path }} {{ else }}{{ end }}",
+          "properties": {
+            "cache_duration": "none",
+            "folder_icon": "\uf115 ",
+            "cycle": [
+              "p:cycle-0",
+              "p:cycle-1",
+              "p:cycle-1",
+              "p:cycle-2",
+              "p:cycle-2",
+              "p:cycle-3",
+              "p:cycle-4",
+              "p:cycle-5",
+              "p:cycle-6",
+              "p:cycle-7"
+            ],
+            "cycle_folder_separator": true,
+            "style": "mixed"
           }
         },
 
