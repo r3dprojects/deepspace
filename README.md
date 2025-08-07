@@ -37,4 +37,11 @@ eval "$(oh-my-posh init bash --config /path/to/deepspace.omp.json)"
 export PATH="$HOME/.local/bin:$PATH"
 export TERMCOLS=$(tput cols)
 trap 'export TERMCOLS=$(tput cols)' WINCH
-eval "$(oh-my-posh init zsh --config /path/to/deepspace.omp.json)"```
+eval "$(oh-my-posh init zsh --config /path/to/deepspace.omp.json)"
+```
+
+## POWERSHELL
+
+```pwsh
+oh-my-posh init pwsh --config 'C:\Users\...\Documents\WindowsPowerShell\themes\deepspace.json' | Invoke-Expression
+```
