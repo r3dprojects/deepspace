@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "var": {
-    "TLRG": "160",
-    "TMED": "120",
-    "TSML": "80"
+    "TLRG": "159",
+    "TMED": "119",
+    "TSML": "79"
   },
   "version": 3,
   "palette": {
@@ -315,19 +315,22 @@
           }
         },
         {
+          "type": "text",
+          "style": "diamond",
           "leading_diamond": "\ue0b6",
-          "powerline_symbol": "\uE0B0",
-          "type": "command",
-          "style": "plain",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "#FFFFCC",
+          "background": "#148B17",
+          "template": "{{ if .Env.TMUX }}TMUX{{ end }}"
+        },
+        {
+          "leading_diamond": "\ue0b2",
+          "trailing_diamond": "\ue0b4",
+          "type": "text",
+          "style": "diamond",
           "foreground": "p:term-fg",
           "background": "p:term-bg",
-          "properties": {
-            "shell": "bash",
-            "style": "full",
-            "cache_duration": "none",
-            "command": "echo $(tput cols </dev/tty 2>/dev/null || echo 80)×$(tput lines </dev/tty 2>/dev/null || echo 24)"
-          },
-          "template": " \ueb4c {{ .Output }} "
+          "template": " \ueb4c {{ .Env.POSH_TERM_DIMS }} "
         },
         {
           "trailing_diamond": "\ue0b4",
